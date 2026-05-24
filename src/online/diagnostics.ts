@@ -192,8 +192,7 @@ function startSocketWatcher() {
   };
   const tick = () => {
     try {
-      // @ts-expect-error - private but stable enough for diagnostics
-      const ws = supabase.realtime?.conn as WebSocket | undefined;
+      const ws = (supabase.realtime as { conn?: WebSocket } | undefined)?.conn;
       const next = ws ? (map[ws.readyState] ?? "unknown") : "unknown";
       if (next !== state.realtime) {
         state.realtime = next;
