@@ -21,7 +21,7 @@ import { BoardRoomChat } from "@/online/BoardRoomChat";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useGameSettings, type TurnTimeoutSec } from "@/lib/gameSettings";
-import { recordMatchResult } from "@/lib/playerStats";
+import { recordMatchResult, useMyProfile } from "@/lib/playerStats";
 import { supabase } from "@/integrations/supabase/client";
 import { getPresenceStatus, type PresenceStatus } from "@/online/presence";
 import {
@@ -334,6 +334,7 @@ function PartidaOnline() {
     })();
     return () => { alive = false; };
   }, [humanDeviceIds.join("|")]);
+  const { profile: myProfile } = useMyProfile();
   const seatAvatars = useMemo<Record<PlayerId, string | null>>(() => {
     const out: Record<PlayerId, string | null> = { 0: null, 1: null, 2: null, 3: null };
     if (!players || !seatKinds) return out;
@@ -341,10 +342,16 @@ function PartidaOnline() {
       if (seatKinds[seat] !== "human") continue;
       const occupant = players.find((p) => p.seat === seat);
       if (!occupant) continue;
-      out[seat] = avatarsByDevice[occupant.deviceId] ?? null;
+      let url = avatarsByDevice[occupant.deviceId] ?? null;
+      // Fallback per al meu propi seient: si el RPC encara no ha resolt
+      // el meu avatar, usa el del perfil autenticat carregat localment.
+      if (!url && mySeat != null && seat === mySeat && myProfile?.avatar_url) {
+        url = myProfile.avatar_url;
+      }
+      out[seat] = url;
     }
     return out;
-  }, [players, seatKinds, avatarsByDevice]);
+  }, [players, seatKinds, avatarsByDevice, mySeat, myProfile?.avatar_url]);
 
   // Stable refs to the latest values handlers depend on. Using refs lets
   // dispatchAction / handleSay / handleSendText keep referential identity
