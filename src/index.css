@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Truc design system. All colors in HSL (without hsl() wrapper).
+ */
+
+@layer base {
+  :root {
+    --background: 145 45% 12%;
+    --foreground: 42 38% 92%;
+
+    --table-felt: 145 50% 16%;
+    --table-felt-dark: 150 55% 8%;
+    --table-rim: 25 35% 18%;
+    --table-rim-light: 28 40% 28%;
+
+    --card: 42 35% 95%;
+    --card-foreground: 220 25% 15%;
+
+    --popover: 145 45% 14%;
+    --popover-foreground: 42 38% 92%;
+
+    --primary: 42 78% 55%;
+    --primary-foreground: 145 60% 10%;
+    --primary-glow: 45 90% 65%;
+    --primary-deep: 38 70% 42%;
+
+    --secondary: 8 75% 48%;
+    --secondary-foreground: 42 38% 96%;
+
+    --muted: 145 30% 20%;
+    --muted-foreground: 42 20% 70%;
+
+    --accent: 28 85% 58%;
+    --accent-foreground: 145 60% 10%;
+
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 42 38% 96%;
+
+    --border: 145 30% 22%;
+    --input: 145 30% 18%;
+    --ring: 42 78% 55%;
+
+    --suit-oros: 42 85% 52%;
+    --suit-copes: 8 75% 48%;
+    --suit-espases: 215 65% 35%;
+    --suit-bastos: 130 65% 32%;
+
+    --team-nos: 8 75% 48%;
+    --team-ells: 215 70% 45%;
+
+    --radius: 0.75rem;
+    --radius-card-token: 0.625rem;
+
+    --sidebar-background: 145 45% 14%;
+    --sidebar-foreground: 42 38% 92%;
+    --sidebar-primary: 42 78% 55%;
+    --sidebar-primary-foreground: 145 60% 10%;
+    --sidebar-accent: 145 30% 20%;
+    --sidebar-accent-foreground: 42 38% 92%;
+    --sidebar-border: 145 30% 22%;
+    --sidebar-ring: 42 78% 55%;
+  }
+
+  .dark {
+    --background: 145 45% 12%;
+    --foreground: 42 38% 92%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html, body {
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(ellipse at center,
+      hsl(145 50% 18%) 0%,
+      hsl(150 55% 10%) 70%,
+      hsl(150 60% 6%) 100%);
+    background-attachment: fixed;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.02em;
+  }
+  .font-title {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.02em;
+  }
+  /*
+   * Estil dels MENÚS (pantalla principal, ajustes, benvinguda):
+   * tipografia Inter i text en MAJÚSCULES per a botons i chips.
+   * Es limita a contenidors marcats amb `.menu-screen` perquè NO
+   * afecte a la partida (cartes, botons de la taula, etc).
+   */
+  .menu-screen,
+  .menu-screen .font-display,
+  .menu-screen h1,
+  .menu-screen h2,
+  .menu-screen h3,
+  .menu-screen h4 {
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: 0;
+  }
+  .menu-screen .font-title {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.02em;
+  }
+  .menu-screen button,
+  .menu-screen a.inline-flex,
+  .menu-screen a[role="button"],
+  .menu-screen [role="button"],
+  .btn-uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  /* Excepcions: no transformar text dins d'inputs ni codi monoespaiat. */
+  .menu-screen button input,
+  .menu-screen a.inline-flex input,
+  .menu-screen button code,
+  .menu-screen button .font-mono,
+  .menu-screen a.inline-flex code,
+  .menu-screen a.inline-flex .font-mono,
+  .menu-screen [role="button"] code,
+  .menu-screen [role="button"] .font-mono,
+  .menu-screen button .chip-hint,
+  .menu-screen [role="button"] .chip-hint {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+}
+
+@layer components {
+  .text-gold {
+    background: linear-gradient(135deg,
+      hsl(45 90% 65%) 0%,
+      hsl(42 78% 55%) 50%,
+      hsl(38 70% 42%) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .felt-surface {
+    background: radial-gradient(ellipse at center,
+      hsl(145 50% 18%) 0%,
+      hsl(150 55% 10%) 70%,
+      hsl(150 60% 6%) 100%);
+    box-shadow: inset 0 4px 24px hsl(150 60% 4% / 0.6);
+  }
+  .wood-surface {
+    background: linear-gradient(135deg,
+      hsl(28 40% 28%) 0%,
+      hsl(25 35% 18%) 50%,
+      hsl(22 40% 22%) 100%);
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px -6px hsl(0 0% 0% / 0.6),
+                0 2px 4px hsl(0 0% 0% / 0.3);
+  }
+  .card-shadow-hover {
+    box-shadow: 0 16px 40px -8px hsl(0 0% 0% / 0.7),
+                0 4px 8px hsl(0 0% 0% / 0.4);
+  }
+  .gold-glow {
+    box-shadow: 0 4px 16px -2px hsl(42 78% 55% / 0.5),
+                0 0 24px hsl(45 90% 65% / 0.25);
+  }
+  .rounded-card { border-radius: var(--radius-card-token); }
+}
+
+@layer utilities {
+  .font-body { font-family: 'Inter', system-ui, sans-serif; }
+  .animate-bones-pulse { animation: bones-pulse 900ms ease-out; transform-origin: center; }
+  .animate-pulse-gold { animation: pulse-gold 2s infinite; }
+  .animate-pulse-attention { animation: pulse-attention 1.4s infinite; }
+  .animate-shout { animation: shout 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+  .animate-fade-in { animation: fade-in 0.25s ease-out; }
+  .animate-card-flip { animation: card-flip 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .animate-deal { animation: deal-card 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+  .animate-play { animation: play-card 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) backwards; }
+  .animate-slide-to-shaded { animation: slide-to-shaded 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) backwards; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(45 90% 65% / 0.6); }
+  50% { box-shadow: 0 0 0 12px hsl(45 90% 65% / 0); }
+}
+@keyframes pulse-attention {
+  0%, 100% {
+    outline-color: hsl(0 0% 100% / 1);
+    outline-width: 3px;
+    outline-offset: 2px;
+    box-shadow: 0 0 12px 2px hsl(0 0% 100% / 0.9);
+  }
+  50% {
+    outline-color: hsl(0 0% 100% / 0.3);
+    outline-width: 5px;
+    outline-offset: 6px;
+    box-shadow: 0 0 26px 8px hsl(0 0% 100% / 0.4);
+  }
+}
+@keyframes shout {
+  0% { transform: scale(0) rotate(-12deg); opacity: 0; }
+  8% { transform: scale(1.2) rotate(-6deg); opacity: 1; }
+  15% { transform: scale(1) rotate(-6deg); opacity: 1; }
+  90% { transform: scale(1) rotate(-6deg); opacity: 1; }
+  100% { transform: scale(0.9) rotate(-6deg); opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes card-flip {
+  0% { transform: rotateY(180deg); }
+  100% { transform: rotateY(0deg); }
+}
+@keyframes deal-card {
+  0% { transform: translate(0, -200%) rotate(-180deg) scale(0.5); opacity: 0; }
+  100% { transform: translate(0, 0) rotate(0) scale(1); opacity: 1; }
+}
+@keyframes play-card {
+  0% { transform: translate(var(--play-from-x, 0px), var(--play-from-y, 0px)) scale(0.9); opacity: 0; }
+  100% { transform: translate(0, 0) scale(1); opacity: 1; }
+}
+@keyframes slide-to-shaded {
+  0% {
+    transform: translate(var(--slide-from-x, 0px), var(--slide-from-mt, 0px));
+    opacity: 1;
+    filter: brightness(1) saturate(1);
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.85;
+    filter: brightness(0.82) saturate(0.9);
+  }
+}
+@keyframes bones-pulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 hsl(45 90% 65% / 0)); }
+  40% { transform: scale(1.18); filter: drop-shadow(0 0 12px hsl(45 90% 65% / 0.65)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0 hsl(45 90% 65% / 0)); }
+}
+/* Always-visible thin scrollbar for chat panels */
+.chat-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / 0.5) transparent;
+}
+.chat-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--primary) / 0.5);
+  border-radius: 4px;
+}
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--primary) / 0.75);
+}
+
+/* Avatar picker scrollbar: transparent track with center line, gold arrows, gray thumb */
+.avatar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.55) transparent;
+}
+.avatar-scroll::-webkit-scrollbar {
+  width: 12px;
+}
+.avatar-scroll::-webkit-scrollbar-track {
+  background:
+    linear-gradient(
+      to right,
+      transparent calc(50% - 1px),
+      hsl(var(--muted-foreground) / 0.35) calc(50% - 1px),
+      hsl(var(--muted-foreground) / 0.35) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    );
+  margin: 2px 0;
+}
+.avatar-scroll::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.55);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.avatar-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.8);
+  background-clip: padding-box;
+}
+.avatar-scroll::-webkit-scrollbar-button:single-button {
+  display: block;
+  height: 12px;
+  width: 12px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 8px 8px;
+}
+.avatar-scroll::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path d='M4 1l3 5H1z' fill='%23F5C84A'/></svg>");
+}
+.avatar-scroll::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path d='M4 7L1 2h6z' fill='%23F5C84A'/></svg>");
+}
+.avatar-scroll::-webkit-scrollbar-button:vertical:start:increment,
+.avatar-scroll::-webkit-scrollbar-button:vertical:end:decrement {
+  display: none;
+}
