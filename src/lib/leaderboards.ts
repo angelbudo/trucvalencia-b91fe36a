@@ -27,5 +27,5 @@ export async function fetchLeaderboard(kind: LeaderboardKind, limit = 50): Promi
   if (kind === "games") {
     filtered.sort((a, b) => (b.wins + b.losses) - (a.wins + a.losses) || b.xp - a.xp);
   }
-  return filtered.map((s, i) => ({ rank: i + 1, stats: s, profile: byUser.get(s.user_id)! }));
+  return filtered.map((s, i) => ({ rank: i + 1, stats: s, profile: byUser.get(s.user_id) as ProfileRow }));
 }
