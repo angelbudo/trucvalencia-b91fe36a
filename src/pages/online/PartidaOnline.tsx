@@ -708,30 +708,8 @@ function PartidaOnline() {
     );
   }
 
-  const isPaused = data.room.pausedAt != null;
-  const proposalPending = !!proposal;
-
   return (
     <>
-      <div className="fixed top-2 left-2 z-40 flex gap-2">
-        <Button
-          size="sm"
-          variant="outline"
-          disabled={proposalPending}
-          onClick={() => handlePauseToggle(!isPaused)}
-        >
-          {isPaused ? "Reanudar partida" : "Pausar partida"}
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          disabled={proposalPending}
-          onClick={handleNewGame}
-        >
-          Començar nova partida
-        </Button>
-      </div>
-
       <TrucBoard
         match={state as MatchState}
         humanActions={myActions}
