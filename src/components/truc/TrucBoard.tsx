@@ -2182,7 +2182,7 @@ export function TrucBoard(props: TrucBoardProps) {
         className="px-2 pt-1 pb-[calc(0.5rem+20px)] bg-background/40 border-t-2 border-primary/30 relative mt-[-35px]"
         style={{ zIndex: TRUC_Z_INDEX.tableActions }}
       >
-        <div className="w-full min-h-[20px] flex flex-wrap justify-center items-center gap-1 mb-1 relative">
+        <div className="w-full min-h-[72px] flex flex-wrap justify-center items-center gap-1 mb-1 relative">
           {!gameEnded && shoutActions.length > 0 && shoutActions.map((a) => {
             // Si l'humà és "primer de la pareja" (en l'ordre de tirada
             // d'aquesta mà juga abans que el seu company), el botó "Envit!"
